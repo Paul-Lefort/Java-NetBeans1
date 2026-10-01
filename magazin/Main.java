@@ -23,7 +23,7 @@ public class Main {
         liste.add(new Produit(3, "PC Portable Dell XPS", 1299.00f, 8));
         liste.add(new Produit(4, "Clavier Mécanique RGB", 79.90f, 25));
         liste.add(new Produit(5, "Souris Sans Fil Logi", 35.00f, 40));
-        liste.add(new Produit(6, "Ecran 27 pouces 4K", 349.99f, 12));
+        liste.add(new Produit(6, "Ecran 27 pouces 4K", 174.99f, 12));
         return liste;
     }
     
@@ -33,7 +33,8 @@ public class Main {
     public static void main(String[] args) {
  
         Magasin magasin = new Magasin(genererProduit());
-        Client client = new Client(1, "LEFORT", "paul.lefort@efrei.net");    
+        Client client = new Client(1, "LEFORT", "paul.lefort@efrei.net");  
+        Commande commande = new Commande(1,client, 0);
         Scanner sc = new Scanner(System.in);
         int option = 0;
     
@@ -63,27 +64,30 @@ public class Main {
 
                 case 2: 
                     sc.nextLine();
-                    System.out.println("Nom du produit : ");
+                    System.out.print("Nom du produit : ");
                     String nom = sc.nextLine();
                     
                     Produit produit = magasin.trouverProduitParNom(nom);
                     if(produit == null){
+                        System.out.println("Produit non trouvé");
                         break;
                     }
-                    System.out.println("Choisissez la quantité : ");
+                    System.out.print("Choisissez la quantité : ");
                     int quantité = sc.nextInt();
-                    
+
                     produit.setQuantité(quantité);
                     client.getPanier().ajouterProduit(produit);
                     break;
 
                 case 3:
+                    
                     System.out.println(client.getPanier().afficherPanier());
                     break;
 
                 case 4:
-                    System.out.println(client.getPanier().afficherPanier());
-                    System.out.println(client.getPanier().CalculerTotal());
+                    commande.setProduitsCommandes(client.getPanier().getPanier());
+                    commande.setTotal(client.getPanier().CalculerTotal());
+                    System.out.println(commande.afficherDetailsCommande());
                     break;
                     
                 default:

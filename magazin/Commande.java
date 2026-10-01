@@ -14,12 +14,12 @@ public class Commande {
     private int idCommande;
     private Client client;
     private Panier produitsCommandes;
-    private int total;
+    private float total;
 
     public Commande(int idCommande, Client client, int total) {
         this.idCommande = idCommande;
         this.client = client;
-        this.produitsCommandes = client.getPanier();
+        this.produitsCommandes = new Panier();
         this.total = total;
     }
 
@@ -47,20 +47,22 @@ public class Commande {
         this.produitsCommandes.setPanier(produitsCommandes);
     }
 
-    public int getTotal() {
+    public float getTotal() {
         return total;
     }
 
-    public void setTotal(int total) {
+    public void setTotal(float total) {
         this.total = total;
     }
     
     public String afficherDetailsCommande(){
         String ensemblePanier = "";
         for(Produit produit : this.produitsCommandes.getPanier()){
-            ensemblePanier += produit.getNom() + "\n";
+            ensemblePanier += produit.getNom() +" "+produit.getQuantité() + "\n";
         }
+        ensemblePanier += "Total : " + this.total;
         return ensemblePanier;
     }
+
 }
 

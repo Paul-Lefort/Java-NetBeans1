@@ -53,6 +53,9 @@ public class Produit {
     public void setQuantité(int quantité) {
         this.quantité = quantité;
     }
+     public void destocker(int quantite) {
+         this.quantité = this.quantité - quantite;
+     }
 
     @Override
     public String toString() {

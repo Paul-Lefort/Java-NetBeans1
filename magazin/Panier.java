@@ -50,7 +50,7 @@ public class Panier {
     public float CalculerTotal(){
         float Total = 0;
         for(Produit produit : this.panier){
-            Total += produit.getPrix();
+            Total += produit.getPrix() * produit.getQuantité();
         }
         return Total;
     }
